@@ -22,9 +22,11 @@ The URL called is http://<IP Fronius>/solar_api/v1/GetPowerFlowRealtimeData.fcgi
 Copy the fronius_basic folder in the custom_components directory into your own custom_components directory in your config directory of Home Assistant.
 
 E.g.:
+```
 ../config/custom_components/fronius_basic/__init__.py
 ../config/custom_components/fronius_basic/manifest.json
 ../config/custom_components/fronius_basic/sensor.py
+```
 
 ### Configuration
 ```
