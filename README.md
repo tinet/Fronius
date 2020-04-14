@@ -15,8 +15,8 @@ Create 1 sensor for each inverter in the system showing the inverter's power pro
 * ...
 * fronius_inverter_n
 
-URL's Utilised
-The URL called is http://<IP Fronius>/solar_api/v1/GetPowerFlowRealtimeData.fcgi
+### URL's Utilised
+The URL called is ``http://<IP Fronius>/solar_api/v1/GetPowerFlowRealtimeData.fcgi``
 
 ### Installation
 Copy the fronius_basic folder in the custom_components directory into your own custom_components directory in your config directory of Home Assistant.
