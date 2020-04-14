@@ -1,0 +1,8 @@
+{
+  "domain": "fronius_basic",
+  "name": "Fronius",
+  "documentation": "https://github.com/tinet/Fronius/blob/master/README.md",
+  "dependencies": [],
+  "codeowners": ["@tinet"],
+  "requirements": []
+}
