@@ -26,10 +26,12 @@ E.g.:
 ../config/custom_components/fronius_basic/manifest.json
 ../config/custom_components/fronius_basic/sensor.py
 
-Configuration
+### Configuration
+```
 # configuration.yaml entry:
 sensor:
   - platform: fronius_basic
     ip_address: <Fronius IP>
     name: 'Fronius'
     scan_interval: 1
+```    
