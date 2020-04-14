@@ -17,6 +17,53 @@ Create 1 sensor for each inverter in the system showing the inverter's power pro
 
 ### Fronius API used
 The URL called is ``http://<fronius ip>/solar_api/v1/GetPowerFlowRealtimeData.fcgi``
+```
+{
+   "Body" : {
+      "Data" : {
+         "Inverters" : {
+            "1" : {
+               "DT" : 75,
+               "E_Day" : 794.4000244140625,
+               "E_Total" : 2014358.125,
+               "E_Year" : 268438.71875,
+               "P" : 1200
+            },
+            "2" : {
+               "DT" : 75,
+               "E_Day" : 303.20001220703125,
+               "E_Total" : 2127122.25,
+               "E_Year" : 248875.5,
+               "P" : 350
+            }
+         },
+         "Site" : {
+            "E_Day" : 1097.6000366210938,
+            "E_Total" : 4141480.375,
+            "E_Year" : 517314.21875,
+            "Meter_Location" : "grid",
+            "Mode" : "meter",
+            "P_Akku" : null,
+            "P_Grid" : -1005.12,
+            "P_Load" : -544.88,
+            "P_PV" : 1550,
+            "rel_Autonomy" : 0,
+            "rel_SelfConsumption" : null
+         },
+         "Version" : "12"
+      }
+   },
+   "Head" : {
+      "RequestArguments" : {},
+      "Status" : {
+         "Code" : 0,
+         "Reason" : "",
+         "UserMessage" : ""
+      },
+      "Timestamp" : "2020-01-21T18:46:49+01:00"
+   }
+}
+```
 
 ### Installation
 Copy the ``fronius_basic`` folder to your custom_components directory of Home Assistant.
