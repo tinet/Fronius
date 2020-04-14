@@ -1,4 +1,4 @@
-#Fronius custom component for Home Assistant
+# Fronius custom component for Home Assistant
 This component simplifies the integration of a Fronius inverter (Smart Meter is mandatory):
 
 The API used for retrieving the Fronius values is lightweight, so you can called it each second
