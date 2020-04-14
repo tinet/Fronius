@@ -47,8 +47,8 @@ The URL called is ``http://<fronius ip>/solar_api/v1/GetPowerFlowRealtimeData.fc
             "P_Grid" : -1005.12,
             "P_Load" : -544.88,
             "P_PV" : 1550,
-            "rel_Autonomy" : 0,
-            "rel_SelfConsumption" : null
+            "rel_Autonomy" : 100,
+            "rel_SelfConsumption" : 35.15354838709
          },
          "Version" : "12"
       }
@@ -60,7 +60,7 @@ The URL called is ``http://<fronius ip>/solar_api/v1/GetPowerFlowRealtimeData.fc
          "Reason" : "",
          "UserMessage" : ""
       },
-      "Timestamp" : "2020-01-21T18:46:49+01:00"
+      "Timestamp" : "2020-04-13T18:46:49+01:00"
    }
 }
 ```
