@@ -229,14 +229,14 @@ class PowerflowData:
         """Get the latest data from inverter."""
         try:
 #            result = requests.get(self._build_url(), timeout=10).json()
+#            self._site = result['Body']['Data']['Site']
+#            self._inverters = result['Body']['Data']['Inverters']
             async with aiohttp.ClientSession() as session:
                 async with session.get(self._build_url()) as response:
                     if response.status == 200:
                         result = await response.json()
                         self._site = result['Body']['Data']['Site']
                         self._inverters = result['Body']['Data']['Inverters']
-#            self._site = result['Body']['Data']['Site']
-#            self._inverters = result['Body']['Data']['Inverters']
 
         except (requests.exceptions.RequestException) as error:
             _LOGGER.error("Unable to connect to Powerflow: %s", error)
