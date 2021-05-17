@@ -1,7 +1,7 @@
 # Fronius custom component for Home Assistant
 This component simplifies the integration of a Fronius inverter (Smart Meter is mandatory):
 
-The API used for retrieving the Fronius values is lightweight, so you can called it each second
+The API used for retrieving the Fronius values is lightweight, so you can called it each two seconds
 
 Creates 20 individual sensors:
 * fronius_power
@@ -24,6 +24,11 @@ Creates 20 individual sensors:
 * fronius_grid_returned_energy_today
 * fronius_grid_returned_energy_month
 * fronius_grid_returned_energy_total
+
+* fronius_balance_neto_horario_hour
+* fronius_balance_neto_horario_today
+* fronius_balance_neto_horario_month
+* fronius_balance-neto_horario_total
 
 Create 1 sensor for each inverter in the system showing the inverter's power production:
 * fronius_inverter1_power
@@ -96,6 +101,5 @@ E.g.:
 sensor:
   - platform: fronius_basic
     ip_address: <fronius ip>
-    name: 'Fronius'
-    scan_interval: 10
+    scan_interval: 4
 ```    
