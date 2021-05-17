@@ -484,7 +484,7 @@ class PowerflowData(FroniusFetcher):
             self._grid_returned_energy_month -= grid_energy_elapsed
             self._grid_returned_energy_total -= grid_energy_elapsed
 
-        # house_power is negative number
+        # house_power is a negative number
         if self._latest_house_power < 0:
             self._house_energy_hour -= house_energy_elapsed
             self._house_energy_today -= house_energy_elapsed
