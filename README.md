@@ -31,10 +31,10 @@ fronius_grid_returned_energy_today
 fronius_grid_returned_energy_month
 fronius_grid_returned_energy_total
 
-fronius_balance_neto_horario_hour
-fronius_balance_neto_horario_today
-fronius_balance_neto_horario_month
-fronius_balance-neto_horario_total
+fronius_balance_neto_hour
+fronius_balance_neto_today
+fronius_balance_neto_month
+fronius_balance-neto_total
 ```
 
 Create 1 sensor for each inverter in the system showing the inverter's power production:
