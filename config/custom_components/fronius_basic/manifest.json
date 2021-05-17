@@ -4,5 +4,6 @@
   "documentation": "https://github.com/tinet/Fronius/blob/master/README.md",
   "dependencies": [],
   "codeowners": ["@tinet"],
-  "requirements": []
+  "requirements": [],
+  "version": "0.2.0"
 }
