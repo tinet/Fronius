@@ -3,17 +3,32 @@ This component simplifies the integration of a Fronius inverter (Smart Meter is 
 
 The API used for retrieving the Fronius values is lightweight, so you can called it each second
 
-Creates 5 individual sensors:
-* fronius_solar
-* fronius_energy_today
-* fronius_house_load
-* fronius_grid_injection
+Creates 20 individual sensors:
+* fronius_power
+* fronius_grid_power
+* fronius_house_power
+
+* fronius_self_sufficiency
 * fronius_self_consumption
 
+* fronius_energy_today
+* fronius_energy_year
+* fronius_energy_total
+ 
+* fronius_grid_energy_hour
+* fronius_grid_energy_today
+* fronius_grid_energy_month
+* fronius_grid_energy_total
+ 
+* fronius_grid_returned_energy_hour
+* fronius_grid_returned_energy_today
+* fronius_grid_returned_energy_month
+* fronius_grid_returned_energy_total
+
 Create 1 sensor for each inverter in the system showing the inverter's power production:
-* fronius_inverter_1
+* fronius_inverter1_power
 * ...
-* fronius_inverter_n
+* fronius_inverterN_power
 
 ### Fronius API used
 The URL called is ``http://<fronius ip>/solar_api/v1/GetPowerFlowRealtimeData.fcgi``
