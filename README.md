@@ -103,3 +103,8 @@ sensor:
     ip_address: <fronius ip>
     scan_interval: 4
 ```    
+# Example
+sensor:
+  - platform: fronius_basic
+    ip_address: 192.168.1.6
+    scan_interval: 4
