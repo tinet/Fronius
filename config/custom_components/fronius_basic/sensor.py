@@ -51,7 +51,7 @@ SENSOR_LIST = {
     'self_sufficiency': ['rel_Autonomy', 'Self Sufficiency', '%', False, 'mdi:brightness-percent'],
     'self_consumption': ['rel_SelfConsumption', 'Self Consumption', '%', False, 'mdi:brightness-percent'],
 
-    'pv_energy_today': ['E_Day', 'PV Energy Today', 'kWh', 'energy2', 'mdi:transmission-tower'],
+    'pv_energy_today': ['E_Day', 'PV Energy Today', 'kWh', 'energy3', 'mdi:transmission-tower'],
     'pv_energy_year': ['E_Year', 'PV Energy Year', 'kWh', 'energy', 'mdi:transmission-tower'],
     'pv_energy_total': ['E_Total', 'PV Energy Total', 'kWh', 'energy', 'mdi:transmission-tower'],
 
@@ -264,8 +264,8 @@ class FroniusSensor(Entity):
         if state is not None:
             if self._convert_units == "energy":
                 self._state = int(round(state / 1000))
-            elif self._convert_units == "energy2":
-                self._state = round(state / 1000, 2)
+            elif self._convert_units == "energy3":
+                self._state = round(state / 1000, 3)
             elif self._convert_units == "energy_float":
                 self._state = round(state / 3600000, 3)
             elif self._convert_units == "power":
