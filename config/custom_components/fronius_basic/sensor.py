@@ -51,9 +51,9 @@ SENSOR_LIST = {
     'self_sufficiency': ['rel_Autonomy', 'Self Sufficiency', '%', False, 'mdi:brightness-percent'],
     'self_consumption': ['rel_SelfConsumption', 'Self Consumption', '%', False, 'mdi:brightness-percent'],
 
-    'pv_energy_today': ['E_Day', 'PV Energy Today', 'kWh', 'energy3', 'mdi:transmission-tower'],
-    'pv_energy_year': ['E_Year', 'PV Energy Year', 'kWh', 'energy', 'mdi:transmission-tower'],
-    'pv_energy_total': ['E_Total', 'PV Energy Total', 'kWh', 'energy', 'mdi:transmission-tower'],
+    'pv_energy_today': ['E_Day', 'PV Energy Today', 'kWh', 'energy3', 'mdi:solar-panel'],
+    'pv_energy_year': ['E_Year', 'PV Energy Year', 'kWh', 'energy', 'mdi:solar-panel'],
+    'pv_energy_total': ['E_Total', 'PV Energy Total', 'kWh', 'energy', 'mdi:solar-panel'],
 
     'grid_energy_hour': ['grid_energy_hour', 'Grid Energy Hour', 'kWh', 'energy_float', 'mdi:transmission-tower'],
     'grid_energy_today': ['grid_energy_today', 'Grid Energy Today', 'kWh', 'energy_float', 'mdi:transmission-tower'],
