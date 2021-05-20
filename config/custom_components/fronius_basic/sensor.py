@@ -51,7 +51,9 @@ SENSOR_LIST = {
     'self_sufficiency': ['rel_Autonomy', 'Self Sufficiency', '%', False, 'mdi:brightness-percent'],
     'self_consumption': ['rel_SelfConsumption', 'Self Consumption', '%', False, 'mdi:brightness-percent'],
 
+    'pv_energy_hour': ['pv_energy_hour', 'PV Energy Hour', 'kWh', 'energy_float', 'mdi:solar-panel'],
     'pv_energy_today': ['E_Day', 'PV Energy Today', 'kWh', 'energy3', 'mdi:solar-panel'],
+    'pv_energy_month': ['pv_energy_month', 'PV Energy Month', 'kWh', 'energy_float', 'mdi:solar-panel'],
     'pv_energy_year': ['E_Year', 'PV Energy Year', 'kWh', 'energy', 'mdi:solar-panel'],
     'pv_energy_total': ['E_Total', 'PV Energy Total', 'kWh', 'energy', 'mdi:solar-panel'],
 
@@ -224,7 +226,12 @@ class FroniusSensor(Entity):
                     if state is None:
                         state = 0
                 else:
-                    if self._json_key == "grid_energy_hour":
+                    if self._json_key == "pv_energy_hour":
+                        state = self._data.pv_energy_hour
+                    elif self._json_key == "pv_energy_month":
+                        state = self._data.pv_energy_month
+
+                    elif self._json_key == "grid_energy_hour":
                         state = self._data.grid_energy_hour
                     elif self._json_key == "grid_energy_today":
                         state = self._data.grid_energy_today
@@ -233,7 +240,7 @@ class FroniusSensor(Entity):
                     elif self._json_key == "grid_energy_total":
                         state = self._data.grid_energy_total
 
-                    if self._json_key == "house_energy_hour":
+                    elif self._json_key == "house_energy_hour":
                         state = self._data.house_energy_hour
                     elif self._json_key == "house_energy_today":
                         state = self._data.house_energy_today
@@ -300,8 +307,13 @@ class FroniusFetcher:
         self._hour = dt_now().hour
         self._month = dt_now().month
         self._latest_call = time.time()
+
+        self._latest_pv_power = 0
         self._latest_grid_power = 0
         self._latest_house_power = 0
+
+        self._pv_energy_hour = 0
+        self._pv_energy_month = 0
 
         self._grid_energy_hour = 0
         self._grid_energy_today = 0
@@ -368,6 +380,18 @@ class FroniusFetcher:
             return self._data['Site']
         return None
 
+
+    @property
+    def pv_energy_hour(self):
+        """Return the PV energy."""
+        return self._pv_energy_hour
+
+    @property
+    def pv_energy_month(self):
+        """Return the PV energy."""
+        return self._pv_energy_month
+
+
     @property
     def grid_energy_hour(self):
         """Return the grid energy."""
@@ -388,25 +412,27 @@ class FroniusFetcher:
         """Return the grid energy."""
         return self._grid_energy_total
 
+
     @property
     def house_energy_hour(self):
-        """Return the grid energy."""
+        """Return the house energy."""
         return self._house_energy_hour
 
     @property
     def house_energy_today(self):
-        """Return the grid energy."""
+        """Return the house energy."""
         return self._house_energy_today
 
     @property
     def house_energy_month(self):
-        """Return the grid energy."""
+        """Return the house energy."""
         return self._house_energy_month
 
     @property
     def house_energy_total(self):
-        """Return the grid energy."""
+        """Return the house energy."""
         return self._house_energy_total
+
 
     @property
     def grid_returned_energy_hour(self):
@@ -428,24 +454,25 @@ class FroniusFetcher:
         """Return the grid returned energy."""
         return self._grid_returned_energy_total
 
+
     @property
     def balance_neto_hour(self):
-        """Return the grid returned energy."""
+        """Return the balance neto horario."""
         return self._balance_neto_hour
 
     @property
     def balance_neto_today(self):
-        """Return the grid returned energy."""
+        """Return the balance neto today."""
         return self._balance_neto_today
 
     @property
     def balance_neto_month(self):
-        """Return the grid returned energy."""
+        """Return the balance neto month."""
         return self._balance_neto_month
 
     @property
     def balance_neto_total(self):
-        """Return the grid returned energy."""
+        """Return the balance neto total."""
         return self._balance_neto_total
 
     async def register(self, sensor):
@@ -470,9 +497,14 @@ class PowerflowData(FroniusFetcher):
         self._data = (await self.fetch_data(self._build_url()))['Body']['Data']
         current_time = time.time()
         elapsed = int(round(current_time - self._latest_call))
+        pv_energy_elapsed = self._latest_pv_power * elapsed
         grid_energy_elapsed = self._latest_grid_power * elapsed
         house_energy_elapsed = self._latest_house_power * elapsed
         self._balance_neto_hour -= grid_energy_elapsed
+
+        self._pv_energy_hour += pv_energy_elapsed
+        self._pv_energy_month += pv_energy_elapsed
+
         if self._latest_grid_power > 0:
             self._grid_energy_hour += grid_energy_elapsed
             self._grid_energy_today += grid_energy_elapsed
@@ -492,6 +524,7 @@ class PowerflowData(FroniusFetcher):
             self._house_energy_total -= house_energy_elapsed
 
         if self._data:
+            self._latest_pv_power = int(round(self._data['Site']['P_PV']))
             self._latest_grid_power = int(round(self._data['Site']['P_Grid']))
             self._latest_house_power = int(round(self._data['Site']['P_Load']))
             self._latest_call = current_time
@@ -508,6 +541,7 @@ class PowerflowData(FroniusFetcher):
                 self._balance_neto_total += self._grid_energy_hour
 
             self._balance_neto_hour = 0
+            self._pv_energy_hour = 0
             self._grid_energy_hour = 0
             self._house_energy_hour = 0
             self._grid_returned_energy_hour = 0
@@ -521,6 +555,7 @@ class PowerflowData(FroniusFetcher):
                 if dt_now().month != self._month:
                     self._month = dt_now().month
                     self._balance_neto_month = 0
+                    self._pv_energy_month = 0
                     self._grid_energy_month = 0
                     self._house_energy_month = 0
                     self._grid_returned_energy_month = 0
