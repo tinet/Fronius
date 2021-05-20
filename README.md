@@ -3,7 +3,7 @@ This component simplifies the integration of a Fronius inverter (Smart Meter is 
 
 The API used for retrieving the Fronius values is lightweight, so you can called it at most each 2 seconds (4 seconds recommended)
 
-Creates 24 individual sensors:
+Creates 26 individual sensors:
 ```
 fronius_pv_power
 fronius_grid_power
@@ -12,7 +12,9 @@ fronius_house_power
 fronius_self_sufficiency
 fronius_self_consumption
 
+fronius_pv_energy_hour
 fronius_pv_energy_today
+fronius_pv_energy_month
 fronius_pv_energy_year
 fronius_pv_energy_total
  
