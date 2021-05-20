@@ -524,13 +524,14 @@ class PowerflowData(FroniusFetcher):
             self._house_energy_total -= house_energy_elapsed
 
         if self._data:
-            self._latest_pv_power = int(round(self._data['Site']['P_PV']))
+            self._latest_pv_power = int(round(self._data['Site']['P_PV'])) if self._data['Site']['P_PV'] else 0
             self._latest_grid_power = int(round(self._data['Site']['P_Grid']))
             self._latest_house_power = int(round(self._data['Site']['P_Load']))
             self._latest_call = current_time
 
         if dt_now().hour != self._hour:
             self._hour = dt_now().hour
+
             if self._grid_energy_hour > self._grid_returned_energy_hour:
                 self._balance_neto_today += self._grid_returned_energy_hour
                 self._balance_neto_month += self._grid_returned_energy_hour
